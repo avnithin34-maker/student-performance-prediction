@@ -1,0 +1,17 @@
+{% extends 'prediction_app/base.html' %}
+{% block content %}
+<div class='row'>
+  <div class='col-md-6 offset-md-3'>
+    <div class='card p-4'>
+      <h3>Create Account</h3>
+      {% if msg %}<div class='alert alert-info'>{{ msg }}</div>{% endif %}
+      <form method='post'>
+        {% csrf_token %}
+        <div class='mb-3'><label>Username</label><input class='form-control' name='username' required></div>
+        <div class='mb-3'><label>Password</label><input class='form-control' type='password' name='password' required></div>
+        <button class='btn btn-primary'>Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

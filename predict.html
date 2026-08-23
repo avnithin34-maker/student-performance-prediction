@@ -1,0 +1,15 @@
+{% extends 'prediction_app/base.html' %}
+{% block content %}
+<div class='row'>
+  <div class='col-md-8 offset-md-2'>
+    <div class='card p-4'>
+      <h3>Predict Student Final Score</h3>
+      <form method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class='btn btn-success'>Predict</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1 @@
+{"features": ["attendance", "internal1", "internal2", "assignments", "study_hours"], "model": "RandomForestRegressor", "rows": 5000}

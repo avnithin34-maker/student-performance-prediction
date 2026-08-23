@@ -1,0 +1,49 @@
+{% extends 'prediction_app/base.html' %}
+{% block content %}
+<div class='row'>
+  <div class='col-md-12'>
+    <h3>Dashboard</h3>
+    <div class='row'>
+      <div class='col-md-6'>
+        <div class='card p-3 mb-3'>
+          <h5>Internal Marks Comparison (Bar)</h5>
+          <canvas id='barChart'></canvas>
+        </div>
+      </div>
+      <div class='col-md-6'>
+        <div class='card p-3 mb-3'>
+          <h5>Performance Trend (Line)</h5>
+          <canvas id='lineChart'></canvas>
+        </div>
+        <div class='card p-3'>
+          <h5>Performance Index (Gauge)</h5>
+          <canvas id='doughnutChart' width='200' height='200'></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const labels = {{ labels|safe }};
+const ins1 = {{ ins1|safe }};
+const ins2 = {{ ins2|safe }};
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: { labels: labels, datasets: [{ label: 'Internal1', data: ins1, backgroundColor: 'rgba(13,110,253,0.7)' }, { label: 'Internal2', data: ins2, backgroundColor: 'rgba(0,200,83,0.7)' }] },
+  options: { responsive:true }
+});
+new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: { labels: labels, datasets: [{ label: 'Internal1', data: ins1, fill:false }, { label: 'Internal2', data: ins2, fill:false }] },
+  options: { responsive:true }
+});
+const avg = (ins1.slice(0,20).reduce((a,b)=>a+b,0) + ins2.slice(0,20).reduce((a,b)=>a+b,0))/40;
+new Chart(document.getElementById('doughnutChart'), {
+  type: 'doughnut',
+  data: { labels: ['Score','Remaining'], datasets: [{ data: [avg, 100-avg], backgroundColor: ['#0d6efd','#e9ecef'] }] },
+  options: { circumference: 180, rotation: -90, cutout: '70%' }
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'prediction_app/base.html' %}
+{% block content %}
+<div class='row'>
+  <div class='col-md-6 offset-md-3'>
+    <div class='card p-4 text-center'>
+      <h3>Prediction Result</h3>
+      <p><strong>Student ID:</strong> {{ student_id }}</p>
+      <h2 class='display-5 text-success'>{{ prediction }}</h2>
+      <a class='btn btn-primary' href='/predict/'>Predict Another</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
